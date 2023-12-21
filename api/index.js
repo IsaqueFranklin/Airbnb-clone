@@ -84,6 +84,10 @@ app.get('/profile', (req, res) => {
     }
 });
 
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json(true);
+});
+
 //Init server
 
 app.listen(4000);
