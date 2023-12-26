@@ -1,7 +1,9 @@
 import {useState} from 'react';
+import {Navigate} from 'react-router-dom';
 import Perks from '../components/Perks';
 import PhotosUploader from '../components/PhotosUploader';
 import ProfileNav from '../components/ProfileNav';
+import axios from 'axios';
 
 export default function PlacesFormPage() {
 
@@ -14,7 +16,7 @@ export default function PlacesFormPage() {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [maxGuests, setMaxGuests] = useState(1);
-
+    const [redirect, setRedirect] = useState(false);
 
     function inputHeader(text) {
         return (
@@ -44,6 +46,11 @@ export default function PlacesFormPage() {
             description, perks, extraInfo, 
             checkIn,checkOut, maxGuests
         });
+        setRedirect(true);
+    }
+
+    if(redirect) {
+        return <Navigate to={'/profile/places'} />
     }
     
     return (
