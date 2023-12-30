@@ -26,6 +26,7 @@ function App() {
           <Route path='/profile' element={ <ProfilePage /> } />  
           <Route path='/profile/places' element={ <PlacesPage /> } />
           <Route path='/profile/places/new' element={ <PlacesFormPage /> } />
+          <Route path='/profile/places/:id' element={ <PlacesFormPage /> } />
         </Route>
       </Routes>
     </UserContextProvider>

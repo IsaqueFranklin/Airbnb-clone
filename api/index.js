@@ -151,6 +151,35 @@ app.get('/places', (req, res) => {
     });
 })
 
+app.put('/places', async (req, res) => {
+    const {token} = req.cookies;
+    const {
+        id, title, address, addedPhotos, 
+        description, perks, extraInfo, 
+        checkIn, checkOut, maxGuests
+    } = req.body;
+
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+        if (err) throw err;
+
+        const placeDoc = await Place.findById(id);
+        if (userData.id === placeDoc.owner.toString()) {
+            placeDoc.set({
+                title, address, photos:addedPhotos, 
+                description, perks, extraInfo, 
+                checkIn, checkOut, maxGuests
+            })
+            await placeDoc.save();
+            res.json(placeDoc);
+        }        
+    });
+})
+
+app.get('/places/:id', async (req, res) => {
+    const {id} = req.params;
+    res.json(await Place.findById(id));
+})
+
 //Init server
 
 app.listen(4000);
