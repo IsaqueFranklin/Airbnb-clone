@@ -93,15 +93,14 @@ app.post('/logout', (req, res) => {
     res.cookie('token', '').json(true);
 });
 
-app.post('/upload-by-link', async (req, res) => {
+app.post('/uploadbylink', async (req, res) => {
     const {link} = req.body;
     const newName = 'photo' + Date.now()+'.jpg';
     await imageDownloader.image({
         url: link,
         dest: __dirname+'/uploads/'+newName,
     });
-    const novaNome = await newName;
-    res.json(novaNome);
+    res.json(await newName);
 })
 
 //Multer middleware configuration for image upload
