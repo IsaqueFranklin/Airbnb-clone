@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import PlacesPage from './pages/PlacesPage';
 import PlacesFormPage from './pages/PlacesFormPage';
+import PlacePage from './pages/PlacePage';
 import axios from 'axios';
 import { UserContextProvider } from './UserContext';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/profile/places' element={ <PlacesPage /> } />
           <Route path='/profile/places/new' element={ <PlacesFormPage /> } />
           <Route path='/profile/places/:id' element={ <PlacesFormPage /> } />
+          <Route path='/place/:id' element={ <PlacePage /> } />
         </Route>
       </Routes>
     </UserContextProvider>
