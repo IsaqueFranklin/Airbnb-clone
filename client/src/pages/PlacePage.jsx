@@ -46,7 +46,7 @@ export default function PlacePage() {
     }
 
     return (
-        <div className='mt-4 px-6 py-8'>
+        <div className='mt-4 px-6 px-8 pt-8'>
             <h1 className='text-3xl'>{place.title}</h1>
             <a className='flex gap-1 my-3 block font-semibold underline' target="_blank" href={'https://maps.google.com/?q='+place.address}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -61,18 +61,18 @@ export default function PlacePage() {
                     <div>
                         {place.photos?.[0] && (
                         <div>
-                            <img className='aspect-square object-cover' src={'http://localhost:4000/uploads/'+place.photos?.[0]} alt="" />
+                            <img onClick={() => setShowAllPhotos(true)} className='cursor-pointer aspect-square object-cover' src={'http://localhost:4000/uploads/'+place.photos?.[0]} alt="" />
                         </div>
                         )}
                     </div>
                     <div className='grid'>
                             {place.photos?.[1] && (
-                            <img className='aspect-square object-cover' src={'http://localhost:4000/uploads/'+place.photos?.[1]} alt="" /> 
+                            <img onClick={() => setShowAllPhotos(true)} className='cursor-pointer aspect-square object-cover' src={'http://localhost:4000/uploads/'+place.photos?.[1]} alt="" /> 
                             )}
                         
                         <div className='overflow-hidden'>
                             {place.photos?.[2] && (
-                            <img className='aspect-square object-cover relative top-2' src={'http://localhost:4000/uploads/'+place.photos?.[2]} alt="" /> 
+                            <img onClick={() => setShowAllPhotos(true)} className='cursor-pointer aspect-square object-cover relative top-2' src={'http://localhost:4000/uploads/'+place.photos?.[2]} alt="" /> 
                             )}
                         </div>
                     </div>
@@ -84,7 +84,7 @@ export default function PlacePage() {
                     Show more photos
                 </button>
             </div>
-            <div className='mt-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]'>
+            <div className='mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]'>
                 <div>
                     <div className='my-4'>
                         <h2 className='font-semibold text-2xl'>Description</h2>
@@ -93,11 +93,16 @@ export default function PlacePage() {
                     Check-in: {place.checkIn} <br />
                     Check-ou: {place.checkOut} <br />
                     Max number of guests: {place.maxGuests}
-                    <div>{place.extraInfo}</div>
                 </div>
                 <div>
                    <BookingWidget place={place} />
                 </div>
+            </div>
+            <div className='bg-white -mx-8 px-8 py-8 border-t'>
+                <div>
+                    <h2 className='font-semibold text-2xl'>Extra info</h2>
+                </div>
+                <div className='mb-4 mt-2 text-sm text-gray-700 leading-5'>{place.extraInfo}</div>
             </div>
         </div>
     )
