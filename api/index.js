@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const Place = require('./models/Place');
+const Booking = require('./models/Booking');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
@@ -181,6 +182,21 @@ app.get('/places/:id', async (req, res) => {
 
 app.get('/places', async (req, res) => {
     res.json(await Place.find());
+})
+
+app.post('/bookings', (req, res) => {
+    const {
+        place, checkIn, checkOut, 
+        numberOfGuests, name, phone, price
+    } = req.body;
+    Booking.create({
+        place, checkIn, checkOut, 
+        numberOfGuests, name, phone, price
+    }).then((doc) => {
+        res.json(doc);
+    }).catch((err => {
+        throw err;
+    }))
 })
 
 //Init server
