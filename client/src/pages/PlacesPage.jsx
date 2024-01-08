@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import ProfileNav from '../components/ProfileNav';
 import axios from 'axios';
+import PlaceImg from '../components/PlaceImg';
 
 export default function PlacesPage() {
 
@@ -29,9 +30,7 @@ export default function PlacesPage() {
                 {places.length > 0 && places.map(place => (
                     <Link to={'/profile/places/'+place._id} className='flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl mb-4'>
                         <div className='flex w-32 h-32 bg-gray-300 shrink-0 rounded-2xl'>
-                            {place.photos.length > 0 && (
-                                <img className='rounded-2xl object-cover aspect-square' src={'http://localhost:4000/uploads/'+place.photos[0]} alt="" />
-                            )}
+                            <PlaceImg place={place} classname={'rounded-2xl object-cover aspect-square'} />
                         </div>
                         <div className='grow-0 shrink'>
                             <h2 className='text-xl'>{place.title}</h2>
